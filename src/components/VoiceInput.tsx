@@ -126,10 +126,10 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1rem', zIndex: 50 }}>
+    <div style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.75rem', zIndex: 50 }}>
       {/* Transcript Popover Display */}
       {(transcript || error || isProcessing) && (
-        <div className="glass-panel animate-fade-in" style={{ padding: '1rem', width: '300px', fontSize: '0.9rem' }}>
+        <div className="glass-panel animate-fade-in voice-popover" style={{ padding: '0.75rem', width: '300px', fontSize: '0.85rem' }}>
           {error ? (
             <div style={{ color: 'var(--danger)' }}>{error}</div>
           ) : isProcessing ? (
@@ -148,6 +148,7 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
 
       {/* Mic Button */}
       <button
+        className="voice-fab"
         onClick={toggleListening}
         disabled={isProcessing}
         style={{

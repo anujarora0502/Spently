@@ -46,9 +46,11 @@ export function Modal({ isOpen, onClose, children, width = '500px' }: ModalProps
         style={{
           width: '100%',
           maxWidth: width,
+          maxHeight: 'calc(100vh - 2rem)',
+          overflowY: 'auto',
           background: 'rgba(20, 20, 25, 0.95)',
           position: 'relative',
-          padding: '2rem',
+          padding: '1.5rem',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -57,13 +59,14 @@ export function Modal({ isOpen, onClose, children, width = '500px' }: ModalProps
           onClick={onClose}
           style={{ 
             position: 'absolute', 
-            top: '1.25rem', 
-            right: '1.25rem', 
+            top: '1rem', 
+            right: '1rem', 
             background: 'none', 
             border: 'none', 
             color: 'var(--text-secondary)', 
             cursor: 'pointer', 
-            transition: 'color 0.2s ease' 
+            transition: 'color 0.2s ease',
+            zIndex: 1
           }}
           onMouseOver={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
           onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}

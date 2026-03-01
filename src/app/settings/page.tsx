@@ -47,8 +47,8 @@ export default function SettingsPage() {
               required
             />
             
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
-              <Button type="submit">Save Settings</Button>
+            <div className="mobile-col" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
+              <Button type="submit" style={{ width: '100%' }}>Save Settings</Button>
               {saved && <span style={{ color: 'var(--success)', fontSize: '0.875rem' }}>Saved successfully!</span>}
             </div>
           </form>

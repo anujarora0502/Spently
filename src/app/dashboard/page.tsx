@@ -119,7 +119,7 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="animate-fade-in mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1rem', marginBottom: '2rem' }}>
         <div className="mobile-text-center mobile-w-full">
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem', letterSpacing: '-0.5px' }}>Overview</h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.25rem', letterSpacing: '-0.5px' }}>Overview</h1>
           <p style={{ color: 'var(--text-secondary)' }}>You've spent <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>₹{viewMonthTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span> in {isPresentMonth ? 'this month' : displayMonthString}.</p>
         </div>
         

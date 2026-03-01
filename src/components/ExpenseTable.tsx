@@ -21,100 +21,150 @@ export function ExpenseTable({ expenses, onDelete, onCopy }: ExpenseTableProps) 
   }
 
   return (
-    <Card className="mobile-p-4" style={{ paddingLeft: 0, paddingRight: 0, overflow: 'hidden' }}>
-      <div className="mobile-table-container" style={{ overflowX: 'auto', width: '100%' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
-              <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Date</th>
-              <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Item</th>
-              <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Category</th>
-              <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem', textAlign: 'right' }}>Amount</th>
-              {(onDelete || onCopy) && <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem', width: '80px', textAlign: 'right' }}>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {expenses.map((expense) => (
-              <tr 
-                key={expense.id} 
-                className="expense-row"
-                style={{ borderBottom: '1px solid var(--border-color)', transition: 'background 0.2s ease' }}
-              >
-                <td style={{ padding: '1rem', whiteSpace: 'nowrap', fontSize: '0.95rem' }}>
-                  {new Date(expense.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
-                </td>
-                <td style={{ padding: '1rem', fontWeight: 500 }}>{expense.item}</td>
-                <td style={{ padding: '1rem' }}>
+    <>
+      {/* Desktop Table View */}
+      <Card className="mobile-hidden" style={{ paddingLeft: 0, paddingRight: 0, overflow: 'hidden' }}>
+        <div style={{ overflowX: 'auto', width: '100%' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
+                <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Date</th>
+                <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Item</th>
+                <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem' }}>Category</th>
+                <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem', textAlign: 'right' }}>Amount</th>
+                {(onDelete || onCopy) && <th style={{ padding: '1.25rem 1rem', fontWeight: 500, fontSize: '0.875rem', width: '80px', textAlign: 'right' }}>Actions</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {expenses.map((expense) => (
+                <tr 
+                  key={expense.id} 
+                  className="expense-row"
+                  style={{ borderBottom: '1px solid var(--border-color)', transition: 'background 0.2s ease' }}
+                >
+                  <td style={{ padding: '1rem', whiteSpace: 'nowrap', fontSize: '0.95rem' }}>
+                    {new Date(expense.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </td>
+                  <td style={{ padding: '1rem', fontWeight: 500 }}>{expense.item}</td>
+                  <td style={{ padding: '1rem' }}>
+                    <span style={{ 
+                      display: 'inline-block', 
+                      padding: '4px 12px', 
+                      borderRadius: '999px',
+                      fontSize: '0.8rem',
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid var(--border-color)',
+                      color: 'var(--text-secondary)'
+                    }}>
+                      {expense.category}
+                    </span>
+                  </td>
+                  <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 600, color: 'var(--success)' }}>
+                    ₹{Number(expense.amount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </td>
+                  {(onDelete || onCopy) && (
+                    <td style={{ padding: '1rem', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                        {onCopy && (
+                          <button
+                            onClick={() => onCopy(expense)}
+                            className="copy-btn"
+                            style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}
+                            title="Copy to today"
+                          >
+                            <CopyPlus size={16} />
+                          </button>
+                        )}
+                        {onDelete && (
+                          <button
+                            onClick={() => onDelete(expense.id)}
+                            className="delete-btn"
+                            style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}
+                            title="Delete expense"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      {/* Mobile Card View */}
+      <div className="mobile-card-list">
+        <Card style={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden' }}>
+          {expenses.map((expense) => (
+            <div key={expense.id} className="expense-card">
+              <div className="expense-card-header">
+                <span style={{ fontWeight: 600, fontSize: '1rem' }}>{expense.item}</span>
+                <span style={{ fontWeight: 700, color: 'var(--success)', fontSize: '1rem' }}>
+                  ₹{Number(expense.amount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+              </div>
+              <div className="expense-card-body">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                    {new Date(expense.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                  </span>
                   <span style={{ 
                     display: 'inline-block', 
-                    padding: '4px 12px', 
+                    padding: '2px 10px', 
                     borderRadius: '999px',
-                    fontSize: '0.8rem',
+                    fontSize: '0.75rem',
                     background: 'rgba(255,255,255,0.05)',
                     border: '1px solid var(--border-color)',
                     color: 'var(--text-secondary)'
                   }}>
                     {expense.category}
                   </span>
-                </td>
-                <td style={{ padding: '1rem', textAlign: 'right', fontWeight: 600, color: 'var(--success)' }}>
-                  ₹{Number(expense.amount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </td>
+                </div>
                 {(onDelete || onCopy) && (
-                  <td style={{ padding: '1rem', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                      {onCopy && (
-                        <button
-                          onClick={() => onCopy(expense)}
-                          className="copy-btn"
-                          style={{ 
-                            background: 'none', 
-                            border: 'none', 
-                            color: 'var(--text-secondary)', 
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '4px'
-                          }}
-                          title="Copy to today"
-                        >
-                          <CopyPlus size={16} />
-                        </button>
-                      )}
-                      {onDelete && (
-                        <button
-                          onClick={() => onDelete(expense.id)}
-                          className="delete-btn"
-                          style={{ 
-                            background: 'none', 
-                            border: 'none', 
-                            color: 'var(--text-secondary)', 
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '4px'
-                          }}
-                          title="Delete expense"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      )}
-                    </div>
-                  </td>
+                  <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    {onCopy && (
+                      <button
+                        onClick={() => onCopy(expense)}
+                        className="copy-btn"
+                        style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px' }}
+                        title="Copy to today"
+                      >
+                        <CopyPlus size={16} />
+                      </button>
+                    )}
+                    {onDelete && (
+                      <button
+                        onClick={() => onDelete(expense.id)}
+                        className="delete-btn"
+                        style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px' }}
+                        title="Delete expense"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    )}
+                  </div>
                 )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              </div>
+            </div>
+          ))}
+        </Card>
       </div>
+
       <style dangerouslySetInnerHTML={{__html: `
         .expense-row:hover { background: rgba(255, 255, 255, 0.03); }
         .expense-row:last-child { border-bottom: none !important; }
         .delete-btn:hover { color: var(--danger) !important; }
         .copy-btn:hover { color: var(--success) !important; }
+        
+        /* Show table on desktop, cards on mobile */
+        .mobile-card-list { display: none; }
+        @media (max-width: 768px) {
+          .mobile-card-list { display: block; }
+        }
       `}} />
-    </Card>
+    </>
   );
 }
