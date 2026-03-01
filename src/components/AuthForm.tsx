@@ -30,16 +30,16 @@ export function AuthForm() {
         if (error) throw error;
         alert('Check your email for the confirmation link!');
       }
-      router.push('/dashboard');
+      // Force a hard navigation to avoid Next.js App Router caching state on mobile
+      window.location.href = '/dashboard';
     } catch (err: any) {
       setError(err.message || 'An error occurred during authentication');
-    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Card glow className="w-full max-w-md mx-auto animate-fade-in" style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }}>
+    <Card glow className="w-full max-w-md mx-auto animate-fade-in mobile-p-4" style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h2 className="heading-gradient" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
           {isLogin ? 'Welcome Back' : 'Create Account'}

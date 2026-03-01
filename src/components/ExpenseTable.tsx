@@ -21,8 +21,8 @@ export function ExpenseTable({ expenses, onDelete, onCopy }: ExpenseTableProps) 
   }
 
   return (
-    <Card style={{ paddingLeft: 0, paddingRight: 0, overflow: 'hidden' }}>
-      <div style={{ overflowX: 'auto' }}>
+    <Card className="mobile-p-4" style={{ paddingLeft: 0, paddingRight: 0, overflow: 'hidden' }}>
+      <div className="mobile-table-container" style={{ overflowX: 'auto', width: '100%' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>

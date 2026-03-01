@@ -117,18 +117,18 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="animate-fade-in" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
-        <div>
+      <div className="animate-fade-in mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1rem', marginBottom: '2rem' }}>
+        <div className="mobile-text-center mobile-w-full">
           <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '0.5rem', letterSpacing: '-0.5px' }}>Overview</h1>
           <p style={{ color: 'var(--text-secondary)' }}>You've spent <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>₹{viewMonthTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span> in {isPresentMonth ? 'this month' : displayMonthString}.</p>
         </div>
         
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Button variant="secondary" onClick={() => { setGraphPrompt(''); setShowGraphs(true); }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <BarChart2 size={18} /> Analytics
+        <div className="mobile-w-full" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Button variant="secondary" onClick={() => { setGraphPrompt(''); setShowGraphs(true); }} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '120px', justifyContent: 'center' }}>
+            <BarChart2 size={20} style={{ flexShrink: 0 }} /> <span style={{ whiteSpace: 'nowrap' }}>Analytics</span>
           </Button>
-          <Button onClick={() => setShowAddForm(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Plus size={18} /> Add Expense
+          <Button onClick={() => setShowAddForm(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '120px', justifyContent: 'center' }}>
+            <Plus size={22} strokeWidth={2.5} style={{ flexShrink: 0 }} /> <span style={{ whiteSpace: 'nowrap' }}>Add Expense</span>
           </Button>
         </div>
       </div>
@@ -170,10 +170,10 @@ export default function DashboardPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginBottom: '2rem' }}>
         <div className="animate-fade-in animate-delay-1">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 600 }}>Recent Expenses</h2>
+          <div className="mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+            <h2 className="mobile-text-center" style={{ fontSize: '1.25rem', fontWeight: 600 }}>Recent Expenses</h2>
             
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', borderRadius: '999px', padding: '8px 16px' }}>
+            <div className="mobile-w-full" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-color)', borderRadius: '999px', padding: '8px 16px' }}>
                <button onClick={prevMonth} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><ChevronLeft size={18} /></button>
                <span style={{ fontSize: '0.9rem', fontWeight: 500, minWidth: '110px', textAlign: 'center' }}>{displayMonthString}</span>
                <button onClick={nextMonth} disabled={isPresentMonth} style={{ background: 'none', border: 'none', color: isPresentMonth ? 'var(--border-color)' : 'var(--text-secondary)', cursor: isPresentMonth ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center' }}><ChevronRight size={18} /></button>

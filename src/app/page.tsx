@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Navigation */}
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', borderRadius: 0, borderTop: 0, borderLeft: 0, borderRight: 0, position: 'sticky', top: 0, zIndex: 40, background: 'rgba(10, 10, 12, 0.3)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }} className="glass-panel border-0 border-b">
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', borderRadius: 0, borderTop: 0, borderLeft: 0, borderRight: 0, position: 'sticky', top: 0, zIndex: 40, background: 'rgba(10, 10, 12, 0.3)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }} className="glass-panel border-0 border-b mobile-nav">
         <div style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-0.5px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img src="/logo.png" alt="Spently Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
           <span className="heading-gradient">Spently.</span>
@@ -16,9 +16,9 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '4rem 1rem' }}>
+      <main className="mobile-p-4" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '4rem 1rem' }}>
         
-        <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div className="animate-fade-in mobile-col" style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', background: 'rgba(255,255,255,0.05)', borderRadius: '999px', margin: '0 auto 2rem', border: '1px solid var(--border-color)', fontSize: '0.875rem' }}>
             <span style={{ display: 'flex', width: '8px', height: '8px', background: 'var(--accent-primary)', borderRadius: '50%', boxShadow: '0 0 10px var(--accent-primary)' }}></span>
             Powered by Gemini AI
@@ -33,17 +33,17 @@ export default function Home() {
             Spently is a smart, beautifully designed finance dashboard. Log expenses, generate instant charts, and ask complex questions about your money—all by speaking.
           </p>
           
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/auth">
-              <Button style={{ padding: '14px 32px', fontSize: '1.1rem' }}>Get Started Free</Button>
+          <div className="mobile-w-full mobile-col" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/auth" className="mobile-w-full cursor-pointer">
+              <Button style={{ padding: '14px 32px', fontSize: '1.1rem', width: '100%' }}>Get Started Free</Button>
             </Link>
           </div>
         </div>
 
         {/* Feature Preview snippet */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '5rem', width: '100%', maxWidth: '1000px' }}>
+        <div className="mobile-col mobile-p-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '5rem', width: '100%', maxWidth: '1000px' }}>
           
-          <div className="glass-panel animate-fade-in animate-delay-1" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
+          <div className="glass-panel animate-fade-in animate-delay-1 mobile-col" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(20, 184, 166, 0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--success)' }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
             </div>
@@ -56,7 +56,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="glass-panel animate-fade-in animate-delay-2" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
+          <div className="glass-panel animate-fade-in animate-delay-2 mobile-col" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-primary)' }}>
                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
             </div>
@@ -69,7 +69,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="glass-panel animate-fade-in animate-delay-3" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
+          <div className="glass-panel animate-fade-in animate-delay-3 mobile-col" style={{ padding: '1.5rem', display: 'flex', alignItems: 'flex-start', gap: '1rem', background: 'rgba(10, 10, 12, 0.8)' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(14, 165, 233, 0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3b82f6' }}>
                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
             </div>

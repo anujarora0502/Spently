@@ -100,6 +100,7 @@ a {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 14px 0 rgba(139, 92, 246, 0.39);
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -181,3 +182,49 @@ a {
 .animate-delay-1 { animation-delay: 0.1s; }
 .animate-delay-2 { animation-delay: 0.2s; }
 .animate-delay-3 { animation-delay: 0.3s; }
+
+/* Responsive Utility Classes */
+@media (max-width: 768px) {
+  .mobile-col {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .mobile-text-center {
+    text-align: center !important;
+  }
+  .mobile-nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center !important;
+    padding: 1rem !important;
+  }
+  .mobile-table-container {
+    overflow-x: auto;
+    width: 100%;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile-p-4 { padding: 1rem !important; }
+  .mobile-m-0 { margin: 0 !important; }
+  .mobile-hidden { display: none !important; }
+  .mobile-w-full { width: 100% !important; }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  body::before, body::after {
+    opacity: 0.5; /* Dim gradients on mobile for performance and readability */
+  }
+  
+  .glass-panel {
+    padding: 1rem !important; /* Reduce padding on cards for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-xs-stack {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+}
