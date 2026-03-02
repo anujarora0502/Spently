@@ -16,27 +16,38 @@ interface AIGraphsProps {
   isOpen: boolean;
   onClose: () => void;
   initialPrompt?: string; // If triggered by voice
+  selectedMonth?: Date; // Month to show in default pie chart
 }
 
 const COLORS = ['#8b5cf6', '#ec4899', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
 
-export function AIGraphs({ expenses, isOpen, onClose, initialPrompt = '' }: AIGraphsProps) {
+export function AIGraphs({ expenses, isOpen, onClose, initialPrompt = '', selectedMonth }: AIGraphsProps) {
   const [prompt, setPrompt] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [chartConfig, setChartConfig] = useState<any>(null);
 
+  // Reset chart when modal closes so it regenerates for the correct month on reopen
+  useEffect(() => {
+    if (!isOpen) {
+      setChartConfig(null);
+      setPrompt('');
+      setError(null);
+    }
+  }, [isOpen]);
+
   // Set default generic chart if opened without a voice prompt
   useEffect(() => {
     if (isOpen && !initialPrompt && !chartConfig) {
+      const viewMonth = selectedMonth || new Date();
+      const monthName = viewMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
       setChartConfig({
         type: 'pie',
-        title: 'This Month by Category',
+        title: `${monthName} by Category`,
         data: expenses
           .filter(e => {
             const d = new Date(e.date);
-            const now = new Date();
-            return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+            return d.getMonth() === viewMonth.getMonth() && d.getFullYear() === viewMonth.getFullYear();
           })
           .reduce((acc: any[], exp) => {
             const existing = acc.find(item => item.name === exp.category);
@@ -49,7 +60,7 @@ export function AIGraphs({ expenses, isOpen, onClose, initialPrompt = '' }: AIGr
           }, [])
       });
     }
-  }, [isOpen, initialPrompt, expenses, chartConfig]);
+  }, [isOpen, initialPrompt, expenses, chartConfig, selectedMonth]);
 
   // If opened via voice prompt, auto-trigger the generation
   useEffect(() => {

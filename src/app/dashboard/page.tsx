@@ -141,7 +141,7 @@ export default function DashboardPage() {
 
       {/* Modals */}
       <AddExpenseForm isOpen={showAddForm} onAdd={handleAddExpense} onClose={() => setShowAddForm(false)} />
-      <AIGraphs expenses={expenses} isOpen={showGraphs} onClose={() => setShowGraphs(false)} initialPrompt={graphPrompt} />
+      <AIGraphs expenses={expenses} isOpen={showGraphs} onClose={() => setShowGraphs(false)} initialPrompt={graphPrompt} selectedMonth={currentViewMonth} />
       <AIQueryModal expenses={currentMonthExpenses} isOpen={showQueryModal} onClose={() => setShowQueryModal(false)} initialPrompt={queryPrompt} />
       
       {/* Delete Confirmation Modal */}
