@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
+import { getAuthenticatedUser, unauthorizedResponse } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
+    const user = await getAuthenticatedUser(req);
+    if (!user) return unauthorizedResponse();
+
     const body = await req.json();
     const { prompt, expenses } = body;
 

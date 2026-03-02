@@ -6,6 +6,7 @@ import { Button } from './Button';
 import { Modal } from './Modal';
 import { Expense } from '@/types/expense';
 import { Loader2 } from 'lucide-react';
+import { authFetch } from '@/lib/authFetch';
 
 interface AIQueryModalProps {
   expenses: Expense[];
@@ -81,9 +82,8 @@ export function AIQueryModal({ expenses, isOpen, onClose, initialPrompt }: AIQue
            return acc;
         }, []);
 
-      const response = await fetch('/api/answer-query', {
+      const response = await authFetch('/api/answer-query', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: searchQuery, expenses, history: formattedHistory })
       });
 

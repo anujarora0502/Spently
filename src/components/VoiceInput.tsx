@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Loader2 } from 'lucide-react';
 import { Card } from './Card';
+import { authFetch } from '@/lib/authFetch';
 
 interface VoiceInputProps {
   onParsedExpense: (expense: { amount: number, date: string, category: string, item: string }) => Promise<void>;
@@ -73,9 +74,8 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
     setIsProcessing(true);
     try {
       // 1. First, classify the intent
-      const intentResponse = await fetch('/api/classify-intent', {
+      const intentResponse = await authFetch('/api/classify-intent', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
       });
 
@@ -99,9 +99,8 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
       }
 
       // 2. If it's an expense, parse it normally
-      const response = await fetch('/api/parse-expense', {
+      const response = await authFetch('/api/parse-expense', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
       });
 

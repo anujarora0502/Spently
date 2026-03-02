@@ -6,6 +6,7 @@ import { Input } from './Input';
 import { Button } from './Button';
 import { Expense } from '@/types/expense';
 import { Loader2, Sparkles } from 'lucide-react';
+import { authFetch } from '@/lib/authFetch';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
   PieChart, Pie, Cell, LineChart, Line, CartesianGrid 
@@ -77,9 +78,8 @@ export function AIGraphs({ expenses, isOpen, onClose, initialPrompt = '', select
     setError(null);
 
     try {
-      const response = await fetch('/api/generate-graph', {
+      const response = await authFetch('/api/generate-graph', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: searchQuery, expenses })
       });
 
