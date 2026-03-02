@@ -19,6 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0a0a0c" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+      </head>
       <body className={`${outfit.variable} font-sans`}>
         {children}
       </body>

@@ -52,9 +52,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <nav className="glass-panel border-0 border-b" style={{ borderRadius: 0, borderTop: 0, borderLeft: 0, borderRight: 0, position: 'sticky', top: 0, zIndex: 40, background: 'rgba(10, 10, 12, 0.3)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1.5rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-          <div style={{ fontWeight: 800, fontSize: '1.25rem' }} className="heading-gradient">
-            <Link href="/dashboard">Spently</Link>
-          </div>
+          <Link href="/dashboard" style={{ fontWeight: 800, fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+            <img src="/logo.png" alt="Spently Logo" style={{ width: '28px', height: '28px', borderRadius: '6px' }} />
+            <span className="heading-gradient">Spently.</span>
+          </Link>
           
           {/* Desktop Nav Links */}
           <div className="desktop-nav-links" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
