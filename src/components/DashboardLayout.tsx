@@ -20,6 +20,20 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       }
     };
     checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_OUT' || !session) {
+          router.push('/auth');
+        } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          setLoading(false);
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [router]);
 
   const handleLogout = async () => {

@@ -9,5 +9,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
     storageKey: 'spently-auth-token',
     storage: typeof window !== 'undefined' ? window.localStorage : undefined,
     flowType: 'implicit',
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
   },
 });
