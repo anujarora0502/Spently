@@ -4,14 +4,19 @@ import { GoogleGenAI } from '@google/genai';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { prompt, apiKey, expenses, history } = body;
+    const { prompt, expenses, history } = body;
 
-    if (!prompt || !apiKey) {
-      return NextResponse.json({ error: 'Missing prompt or API Key' }, { status: 400 });
+    if (!prompt) {
+      return NextResponse.json({ error: 'Missing prompt' }, { status: 400 });
     }
 
     if (!expenses || !Array.isArray(expenses)) {
       return NextResponse.json({ error: 'Missing expense data' }, { status: 400 });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: 'GEMINI_API_KEY not configured on server' }, { status: 500 });
     }
 
     const ai = new GoogleGenAI({ apiKey });

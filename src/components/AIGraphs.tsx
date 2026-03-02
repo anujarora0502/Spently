@@ -77,13 +77,10 @@ export function AIGraphs({ expenses, isOpen, onClose, initialPrompt = '', select
     setError(null);
 
     try {
-      const apiKey = localStorage.getItem('spently_gemini_api_key');
-      if (!apiKey) throw new Error('Gemini API key not found in Settings.');
-
       const response = await fetch('/api/generate-graph', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: searchQuery, apiKey, expenses })
+        body: JSON.stringify({ prompt: searchQuery, expenses })
       });
 
       if (!response.ok) {

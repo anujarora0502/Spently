@@ -72,16 +72,11 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
   const processTranscript = async (text: string) => {
     setIsProcessing(true);
     try {
-      const apiKey = localStorage.getItem('spently_gemini_api_key');
-      if (!apiKey) {
-        throw new Error('Please configure your Gemini API Key in Settings first.');
-      }
-
       // 1. First, classify the intent
       const intentResponse = await fetch('/api/classify-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, apiKey })
+        body: JSON.stringify({ text })
       });
 
       if (!intentResponse.ok) {
@@ -107,7 +102,7 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
       const response = await fetch('/api/parse-expense', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, apiKey })
+        body: JSON.stringify({ text })
       });
 
       if (!response.ok) {
@@ -129,7 +124,7 @@ export function VoiceInput({ onParsedExpense, onGraphRequest, onAnswerRequest }:
     <div style={{ position: 'fixed', bottom: '1.5rem', right: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.75rem', zIndex: 50 }}>
       {/* Transcript Popover Display */}
       {(transcript || error || isProcessing) && (
-        <div className="glass-panel animate-fade-in voice-popover" style={{ padding: '0.75rem', width: '300px', fontSize: '0.85rem' }}>
+        <div className="glass-panel animate-fade-in voice-popover" style={{ padding: '0.75rem', width: '300px', fontSize: '0.85rem', background: 'rgba(20, 20, 25, 0.9)' }}>
           {error ? (
             <div style={{ color: 'var(--danger)' }}>{error}</div>
           ) : isProcessing ? (

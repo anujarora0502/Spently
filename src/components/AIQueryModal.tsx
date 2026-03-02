@@ -70,9 +70,6 @@ export function AIQueryModal({ expenses, isOpen, onClose, initialPrompt }: AIQue
     ]);
 
     try {
-      const apiKey = localStorage.getItem('spently_gemini_api_key');
-      if (!apiKey) throw new Error('Gemini API key not found in Settings.');
-
       // Format history for the AI exactly how it expects it
       const formattedHistory = currentHistory
         .filter(m => !m.loading && m.content)
@@ -87,7 +84,7 @@ export function AIQueryModal({ expenses, isOpen, onClose, initialPrompt }: AIQue
       const response = await fetch('/api/answer-query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: searchQuery, apiKey, expenses, history: formattedHistory })
+        body: JSON.stringify({ prompt: searchQuery, expenses, history: formattedHistory })
       });
 
       if (!response.ok) {

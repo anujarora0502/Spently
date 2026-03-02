@@ -4,10 +4,15 @@ import { GoogleGenAI } from '@google/genai';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { text, apiKey } = body;
+    const { text } = body;
 
-    if (!text || !apiKey) {
-      return NextResponse.json({ error: 'Missing text or API Key' }, { status: 400 });
+    if (!text) {
+      return NextResponse.json({ error: 'Missing text' }, { status: 400 });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: 'GEMINI_API_KEY not configured on server' }, { status: 500 });
     }
 
     const ai = new GoogleGenAI({ apiKey });

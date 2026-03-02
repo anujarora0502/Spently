@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { X } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -55,24 +54,7 @@ export function Modal({ isOpen, onClose, children, width = '500px' }: ModalProps
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button 
-          onClick={onClose}
-          style={{ 
-            position: 'absolute', 
-            top: '1rem', 
-            right: '1rem', 
-            background: 'none', 
-            border: 'none', 
-            color: 'var(--text-secondary)', 
-            cursor: 'pointer', 
-            transition: 'color 0.2s ease',
-            zIndex: 1
-          }}
-          onMouseOver={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-          onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-        >
-          <X size={20} />
-        </button>
+
         {children}
       </div>
     </div>
