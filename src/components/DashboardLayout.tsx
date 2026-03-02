@@ -11,19 +11,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        router.push('/auth');
-      } else {
-        setLoading(false);
-      }
-    };
-    checkAuth();
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (event === 'SIGNED_OUT' || !session) {
+        if (event === 'INITIAL_SESSION') {
+          // This fires once when the client finishes loading the session from storage
+          if (!session) {
+            router.push('/auth');
+          } else {
+            setLoading(false);
+          }
+        } else if (event === 'SIGNED_OUT') {
           router.push('/auth');
         } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           setLoading(false);
