@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/Button';
+import { AuthRedirect } from '@/components/AuthRedirect';
 
 export default function Home() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <AuthRedirect />
       {/* Navigation */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', borderRadius: 0, borderTop: 0, borderLeft: 0, borderRight: 0, position: 'sticky', top: 0, zIndex: 40, background: 'rgba(10, 10, 12, 0.3)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }} className="glass-panel border-0 border-b">
         <div style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-0.5px', display: 'flex', alignItems: 'center', gap: '10px' }}>
