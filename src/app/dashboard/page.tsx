@@ -115,6 +115,12 @@ export default function DashboardPage() {
     setCurrentViewMonth(d);
   };
 
+  const defaultCategories = ['Food & Dining', 'Transport', 'Utilities', 'Entertainment', 'Shopping', 'Health', 'Others'];
+  const userCategories = Array.from(new Set([
+    ...defaultCategories,
+    ...expenses.map(e => e.category)
+  ])).sort();
+
   return (
     <DashboardLayout>
       <div className="animate-fade-in mobile-col" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '1rem', marginBottom: '2rem' }}>
@@ -140,7 +146,7 @@ export default function DashboardPage() {
       )}
 
       {/* Modals */}
-      <AddExpenseForm isOpen={showAddForm} onAdd={handleAddExpense} onClose={() => setShowAddForm(false)} />
+      <AddExpenseForm isOpen={showAddForm} onAdd={handleAddExpense} onClose={() => setShowAddForm(false)} userCategories={userCategories} />
       <AIGraphs expenses={expenses} isOpen={showGraphs} onClose={() => setShowGraphs(false)} initialPrompt={graphPrompt} selectedMonth={currentViewMonth} />
       <AIQueryModal expenses={currentMonthExpenses} isOpen={showQueryModal} onClose={() => setShowQueryModal(false)} initialPrompt={queryPrompt} />
       

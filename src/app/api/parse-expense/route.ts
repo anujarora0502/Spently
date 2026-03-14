@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       Extract the following information from the user's input:
       - amount (a number)
       - item (what they bought)
-      - category (a short, standard budgeting category like Food, Transport, Utilities, Entertainment, etc.)
+      - category (Determine the correct category based on their prompt. If the user explicitly asks to add the expense in a specific category (e.g. "add this expense to travel" or "category is books"), use that EXACT category name. If they don't specify a category, try to use a standard budgeting category. If the expense doesn't clearly fit into a standard category or is unusual, default the category to "Others".)
       - date (Format as YYYY-MM-DD. Assume the current year or month if ambiguous. If they say "today" or don't specify a date, output today's date: ${currentDateString})
 
       User Input: "${text}"

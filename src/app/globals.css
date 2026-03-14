@@ -143,6 +143,20 @@ a {
   box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
+/* Custom Date Input for Chrome/Safari to hide default icon */
+.custom-date-input::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
 .input-label {
   display: block;
   font-size: 0.875rem;
